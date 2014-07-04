@@ -1,3 +1,3 @@
 #Haikus. 
 
-Simple.
+Simple. Just `npm install`.
