@@ -26,15 +26,15 @@ var wordify = function(list){
 
 //Makes the haiku!
 var makeHaiku = function(){
+	var the_haiku = {}
 	var doYouGetCurveball = Math.random()
-	if(doYouGetCurveball < 0.005){
+	if(doYouGetCurveball < 0.05){
 		the_haiku[1] = "Surprise."
-		the_haiku[2] = ""
-		the_haiku[3] = wordify([17])
+		the_haiku[2] = "\n"
+		the_haiku[3] = wordify(pickRandom([[10, 10], [11, 10], [14], [19]]))
 		return the_haiku
 	}
 	var template = pickRandom(haiku_templates)
-	var the_haiku = {}
 	for(var i = 1; i < 4 ; i++){
 		the_haiku[i] = wordify(template[i-1])
 	}
