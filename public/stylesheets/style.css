@@ -6,3 +6,39 @@ body {
 a {
   color: #00B7FF;
 }
+
+#display{
+	margin-left: 30%;
+	margin-top: 10%;
+}
+
+#about{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  min-height: 100%;
+  background-color: white;
+}
+
+#about > div{
+	padding: 100px;
+}
+
+#about .close{
+  position: absolute;
+  top: 50px;
+  right: 100px;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#aboutbutton {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -3,12 +3,54 @@
   <head>
     <title>some haiku inspiration.</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+            $("#about").keydown(function(e){
+              if(e.keyCode == 27){
+                $("#about").hide()
+              }
+            })
+            $(document.body).keydown(function(e) {
+              if(e.which == 13){
+                location.reload()
+              }
+            })
+      })
+    </script>
   </head>
   <body>
-  	<h1>some haiku inspiration. </h1>
-  	<br/>
-    <p><%= haiku["1"] %></p>
-    <p><%= haiku["2"] %></p>
-    <p><%= haiku["3"] %></p>
+    <div id = "display">
+    	<h1>a haiku.</h1>
+    	<br/>
+      <p><%= haiku["1"] %></p>
+      <p><%= haiku["2"] %></p>
+      <p><%= haiku["3"] %></p>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <p> (Press enter for another.) </p>
+    </div>
+
+    <div id = "about" style = 'display: none'>
+    <div>
+        <div class='close' onclick="$('#about').hide()">Back to more haikus</div>
+        <h1> What is this? </h1>
+        <p> A haiku is a form of Japanese poetry where the lines have predetermined syllable counts: these are 5-7-5. </p>
+       
+        <h1> How does this work? </h1>
+        <p> Syllable templates are randomly generated based on integral partitions of 5 and 7 (1, 4 / 1, 1, 1, 3, 1 / 1, 1, 2, 1 for example). Based on the number of words in a line, Brown corpus part-of-speech-tagged templates from famous haikus are used to create lines that have a "haiku feel". These templates are then randomly filled in with words from the Moby corpus, which is tagged by syllable count. </p>
+
+        <p> Unfortunately, a lot of the words in the Moby corpus are antiquated, so some of the lines might not make the most sense.  </p>
+    </div>
+    </div>
+
   </body>
+
+  <footer>
+  <div id ="aboutbutton" onclick = "$('#about').show()"> What is this? </div>
+  </footer>
+
 </html>
