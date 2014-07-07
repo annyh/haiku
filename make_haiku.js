@@ -65,6 +65,9 @@ var template_to_line = function(list){
 		else{
 			var alos = syllable_and_speech_tagged_words[syllable_list[0]] //that many syllables
 			var viable_words = alos.filter(function(a){if(a.part === grammar_template[0]){return a}})
+			if(viable_words.length === 0){
+				viable_words = alos.slice(1, 10)
+			}
 			var word_pair = pickRandom(viable_words)
 			// var word_pair = {'word': word, 'part': grammar_template[0]}
 			// if(returnList.indexOf(word_pair) === -1){
@@ -78,7 +81,7 @@ var template_to_line = function(list){
 		}
 	}
 	//returnList at this point has both the word and the part.
-	var returnWords = returnList.map(function(a){if(a === undefined){return "a"} if(a.word === undefined){return a.part;} return a.word;})
+	var returnWords = returnList.map(function(a){if(a.word === undefined){return a.part;} return a.word;})
 	//returnGrammar = returnList.map(function(a){return a.part})
 	var line = returnWords.reduce(function(word1, word2){
 		if(word2 === "," || word2 === "?" || word2 === "!" || word2 === "--" || word2 === "..." || word2 === "." || word2 === ":"){
