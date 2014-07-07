@@ -27,12 +27,22 @@ def wordify(word):
 
 syllables_to_words = defaultdict(set)
 
+most_common_words = set()
+
+with open("15k.txt", "r") as file:
+	for line in file:
+		line = line.strip()
+		most_common_words.add(line)
+
 with open("mhyph/mhyphutf8.txt", "r") as file:
 	for line in file:
 		line = line.strip()
 		words = line.split()
 		for word in words:
-			syllables_to_words[num_syllables(word)].add(wordify(word))
+			#Only add if word is in the 10,000 most common words.
+			the_word = wordify(word)
+			if the_word in most_common_words:
+				syllables_to_words[num_syllables(word)].add(the_word)
 
 wordsyllables = defaultdict()
 for key in syllables_to_words.keys():
