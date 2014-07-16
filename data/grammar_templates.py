@@ -2,15 +2,17 @@ import nltk
 from collections import defaultdict
 import json
 
-grammar_templates = defaultdict(dict)
-num_words_to_template = defaultdict(list)
+templates = []
 
 
 with open("famous_haikus.txt", "r") as haikus:
-	template = []
+	template = {}
+	counter = 1
 	for line in haikus:
 		if "=" in line:
-			template = []
+			templates.append(template)
+			template = {}
+			counter = 1
 		else:
 			parts = nltk.pos_tag(line.split())
 			correct_parts = []
@@ -25,12 +27,16 @@ with open("famous_haikus.txt", "r") as haikus:
 					continue
 				else:
 					num_words += 1
-			num_words_to_template[num_words].append(correct_parts)
+			template[counter] = correct_parts
+			counter += 1
+			# num_words_to_template[num_words].append(correct_parts)
 	#num_words_to_template needs to be split into correct format for JSON dumping
 
-for key in num_words_to_template.keys():
-	grammar_templates['7'][key] = num_words_to_template[key]
-	if key <= 5:
-		grammar_templates['5'][key] = num_words_to_template[key]
+# for key in num_words_to_template.keys():
+# 	grammar_templates['7'][key] = num_words_to_template[key]
+# 	if key <= 5:
+# 		grammar_templates['5'][key] = num_words_to_template[key]
 
-open('grammar_templates.json', 'w').write(json.dumps(grammar_templates))
+print templates
+
+open('grammar_templates.json', 'w').write(json.dumps(templates))
