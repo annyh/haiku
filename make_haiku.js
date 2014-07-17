@@ -28,7 +28,8 @@ var replaceAll = function(find, replace, str) {
 }
 
 var pickRandom = function(list) {
-	return list[Math.floor(Math.random()*list.length)];
+	var myList = list[Math.floor(Math.random()*list.length)];
+	return myList
 }
 
 var reverseString = function(s){
@@ -121,7 +122,8 @@ var makeHaiku = function(){
 	// }
 	for(var i = 1; i < 4 ; i++){
 		var numWords = 0
-		var this_g_temp = grammar_template[i]
+		var this_g_temp = grammar_template[i].slice(0) //FOR SOME REASON, GRAMMAR TEMPLATES ARE GETTING DELETED.
+		console.log(this_g_temp)
 		this_g_temp.forEach(function(word2){
 			if(word2 === "," || word2 === "?" || word2 === "!" || word2 === "--" || word2 === "..." || word2 === "." || word2 === ":"){
 				
@@ -131,7 +133,7 @@ var makeHaiku = function(){
 			}})
 		var this_haiku_template = choose(numWords)
 		if(i === 3){
-			var line = replaceAll(":", "...", template_to_line(this_haiku_template, grammar_template[i]))
+			var line = replaceAll(":", "...", template_to_line(this_haiku_template, this_g_temp))
 			if(line.slice(-1) === ","){
 				the_haiku[i] = line.slice(0, line.length - 1)
 			}
@@ -140,7 +142,7 @@ var makeHaiku = function(){
 			}
 		}
 		else{
-			the_haiku[i] = replaceAll(":", "...", template_to_line(this_haiku_template, grammar_template[i]))
+			the_haiku[i] = replaceAll(":", "...", template_to_line(this_haiku_template, this_g_temp))
 		}
 	}
 	return the_haiku
