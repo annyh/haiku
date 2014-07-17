@@ -97,10 +97,10 @@ var template_to_line = function(list, grammar_template){
 	return line;
 }
 
-var choose = function(numWords){
+var choose = function(numWords, num_syllables){
 	while(true){
 		tried = pickRandom(haiku_templates_flattened)
-		if(tried.length == numWords){
+		if(tried.length == numWords && tried.reduce(function(a,b){return a +b}) === num_syllables){
 			return tried
 		}
 		else{
@@ -131,7 +131,13 @@ var makeHaiku = function(){
 			else{
 				numWords += 1
 			}})
-		var this_haiku_template = choose(numWords)
+		var this_haiku_template = 0
+		if(i === 2){
+			this_haiku_template = choose(numWords, 7)
+		}
+		else{
+			this_haiku_template = choose(numWords, 5)
+		}
 		if(i === 3){
 			var line = replaceAll(":", "...", template_to_line(this_haiku_template, this_g_temp))
 			if(line.slice(-1) === ","){
